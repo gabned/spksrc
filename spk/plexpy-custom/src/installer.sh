@@ -42,12 +42,6 @@ postinst ()
     if [ "${SYNOPKG_PKG_STATUS}" == "INSTALL" ]; then
         # Clone the repository
         ${GIT} clone --depth 10 --recursive -q -b ${wizard_fork_branch:=master} ${wizard_fork_url:=git://github.com/drzoidberg33/plexpy.git} ${INSTALL_DIR}/var/plexpy > /dev/null 2>&1
-
-        # get IP
-        sIPNAS=`/usr/syno/sbin/synonet --show | grep -m 1 IP:  | awk -F: '{gsub(/[ \t]+/, "", $2); print $2}'`
-
-        # Add Host IP to config.ini
-        echo "http_host = ${sIPNAS}" >> ${INSTALL_DIR}/var/{CFG_FILE}
     fi
 
     # Create user
