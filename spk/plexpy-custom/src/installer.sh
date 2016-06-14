@@ -46,9 +46,6 @@ postinst ()
 
     # Create user
     adduser -h ${INSTALL_DIR}/var -g "${DNAME} User" -G ${GROUP} -s /bin/sh -S -D ${USER}
-    
-    # Correct the files ownership
-    chown -R ${USER}:root ${SYNOPKG_PKGDEST}
 
     # Add firewall config
     ${SERVICETOOL} --install-configure-file --package ${FWPORTS} >> /dev/null
@@ -57,6 +54,9 @@ postinst ()
     echo "[General]" > ${INSTALL_DIR}/var/${CFG_FILE}
     echo "launch_browser = 0" >> ${INSTALL_DIR}/var/${CFG_FILE}
     echo "http_port = 8010" >> ${INSTALL_DIR}/var/${CFG_FILE}
+
+    # Correct the files ownership
+    chown -R ${USER}:root ${SYNOPKG_PKGDEST}
     
     exit 0
 }
