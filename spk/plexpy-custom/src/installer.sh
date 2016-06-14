@@ -54,9 +54,9 @@ postinst ()
     ${SERVICETOOL} --install-configure-file --package ${FWPORTS} >> /dev/null
 
     # Create default config.ini
-    echo "[General]" > ${INSTALL_DIR}/var/{CFG_FILE}
-    echo "launch_browser = 0"
-    echo "http_port = 8010" >> ${INSTALL_DIR}/var/{CFG_FILE}
+    echo "[General]" > ${INSTALL_DIR}/var/${CFG_FILE}
+    echo "launch_browser = 0" >> ${INSTALL_DIR}/var/${CFG_FILE}
+    echo "http_port = 8010" >> ${INSTALL_DIR}/var/${CFG_FILE}
     
     exit 0
 }
