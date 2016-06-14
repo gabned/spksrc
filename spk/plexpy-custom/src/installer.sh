@@ -26,10 +26,6 @@ preinst ()
     if [ "${SYNOPKG_PKG_STATUS}" == "INSTALL" ] && ! ${GIT} ls-remote --heads --exit-code ${wizard_fork_url:=git://github.com/drzoidberg33/plexpy/plxpy.git} ${wizard_fork_branch:=master} > /dev/null 2>&1; then
         echo "Incorrect fork"
         exit 1
-        # Create default config.ini
-        echo "[General]" > ${INSTALL_DIR}/var/{CFG_FILE}
-        echo "launch_browser = 0"
-        echo "http_port = 8010" >> ${INSTALL_DIR}/var/{CFG_FILE}
     fi
 
     exit 0
@@ -57,6 +53,11 @@ postinst ()
     # Add firewall config
     ${SERVICETOOL} --install-configure-file --package ${FWPORTS} >> /dev/null
 
+    # Create default config.ini
+    echo "[General]" > ${INSTALL_DIR}/var/{CFG_FILE}
+    echo "launch_browser = 0"
+    echo "http_port = 8010" >> ${INSTALL_DIR}/var/{CFG_FILE}
+    
     exit 0
 }
 
